@@ -1,55 +1,46 @@
+#include <stdlib.h>
 #include <stdio.h>
-#include <stdlib.h> //necessário para usar as funções malloc() e free()
-#include <conio.h>
-int main(void)
-{
-  float *v; //definindo o ponteiro v
-  int i, num_componentes;
-  
-  printf("Informe o numero de componentes do vetor\n");
-  scanf("%d", &num_componentes);
-  
-  /* ------------- Alocando dinamicamente o espaço necessário -------------
-  
-  1 - Calcular o número de bytes necessários
-  primeiramente multiplicamos o número de componentes do vetor pela
-  quantidade de bytes que é dada pelo comando sizeof,
-  portanto temos:
-  num_componentes * sizeof(float)
-  
-  2 - Reservar a quantidade de memória
-  usamos malloc para reservar essa quantidade de memória,
-  então temos:
-  malloc(num_componentes * sizeof(float))
-  
-  3 - Converter o ponteiro para o tipo de dados desejado
-  como a função malloc retorna um ponteiro do tipo void,
-  precisamos converter esse ponteiro para o tipo da nossa variável, no caso float,
-  por isso usamos o comando de conversão explicita:
-  (float *)
-  
-  4 - juntando tudo e atribuindo em v temos o comando abaixo: */
-  
-  v = (float *) malloc(num_componentes * sizeof(float));
-  
-  //Armazenando os dados em um vetor
-  for (i = 0; i < num_componentes; i++)
-  {
-    printf("\nDigite o valor para a posicao %d do vetor: ", i+1);
-    scanf("%f",&v[i]);
-  }
-  
-  // ------ Percorrendo o vetor e imprimindo os valores ----------
-  printf("\n*********** Valores do vetor dinamico ************\n\n");
-  
-  for (i = 0;i < num_componentes; i++)
-  {
-    printf("%.2f\n",v[i]);
-  }
-  
-  //liberando o espaço de memória alocado
-  free(v);
-  
-  getch();
-  return 0;
+
+int main(void) {
+    int i, j, num_valores, aux; //Declaração das variáveis locais i, j, num_valores e aux.
+    
+    printf("Informe a quantidade de valores: "); //Solicita o valor
+    scanf("%d", &num_valores); //armazena o valor na variavel num_valores
+    
+    if (num_valores <= 0) { //verifica se o valor informado é menor ou igual a zero
+        printf("O numero de valores deve ser maior que zero."); 
+        return 1; // Encerra o programa com código de erro
+    }
+    
+    int *valores = (int *)malloc(num_valores * sizeof(int)); 
+   //Aloca dinamicamente um array de num_valores elementos do tipo int e armazena o ponteiro para este array na variável valores. 
+
+    if (valores == NULL) { //Verifica se a alocação de memória foi bem-sucedida.
+        printf("Erro de alocação de memória.");
+        return 1; // Encerra o programa com código de erro
+    }
+
+    for (i = 0; i < num_valores; i++) { //Solicita ao usuário que insira os valores e os armazena no array valores.
+        printf("Informe o valor %d: ", i + 1);
+        scanf("%d", &valores[i]);
+    }
+
+    for (i = 0; i < num_valores - 1; i++) {
+        for (j = i + 1; j < num_valores; j++) {
+            if (valores[i] > valores[j]) {
+                aux = valores[i];
+                valores[i] = valores[j];
+                valores[j] = aux;
+            }
+        }
+    }//Ordena os valores armazenados no array valores em ordem crescente usando o algoritmo de ordenação bubble sort.
+    
+    printf("Valores ordenados de forma crescente:\n");
+    for (i = 0; i < num_valores; i++) {
+        printf("%d\n", valores[i]);
+    }//Imprime os valores ordenados em ordem crescente.
+    
+    free(valores); //Libera a memória alocada para o array valores.
+    
+    return 0; // Retorna zero para indicar sucesso
 }
