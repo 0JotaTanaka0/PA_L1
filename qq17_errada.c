@@ -2,10 +2,11 @@
 #include <stdio.h> //é necessária para entrada e saída padrão.
 
 int comparar(const void *a, const void *b) {
-    return (*(int *)a - *(int *)b);
+    int valorA = *((int *)a);
+    int valorB = *((int *)b);
+    return valorA - valorB; // Ordem crescente
+
 }
-//O qsort usa essa função para determinar a ordem dos elementos. Se a for menor que b, ela retorna um número negativo, 
-//se forem iguais, retorna 0, e se a for maior que b, retorna um número positivo.
 
 int main(void) { //Declaração da função main
     int i, num_valores; //Declara as variáveis i e num_valroes.
