@@ -10,3 +10,5 @@ int main(){
 
     return 0;
 }
+
+//Resposta: *(pulo+2)

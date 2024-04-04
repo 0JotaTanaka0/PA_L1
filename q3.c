@@ -8,15 +8,15 @@ int main() {
     // p = &i;
     // printf("Teste1\n");
 
-    // 2. Ilegal: *q = &j; Não mostrou resultado
+    // 2. Ilegal: *q = &j; Está tentando atribuir o endereço de j ao valor apontado q!
     // *q = &j;
     // printf("Teste2\n");
 
-    // 3. Legal: p = &*&i;
+    // 3. Legal: p = &*&i; 
     // p = &*&i;
     // printf("Teste3\n");
 
-    // 4. Ilegal: i = (*&)j; Erro ao compilar
+    // 4. Ilegal: i = (*&)j;       '(&)j' não é uma operação válida!
     // i = (*&)j
     // printf("Teste4\n");
   
@@ -28,7 +28,7 @@ int main() {
     // i = *&*&j;
     // printf("Teste6\n");
 
-    // 7. Ilegal: q = *p;
+    // 7. Ilegal: q = *p;         Tenta atribuir um valor inteiro '*p' a um ponteiro! 
     // q = *p;
     // printf("Teste7\n");
 
